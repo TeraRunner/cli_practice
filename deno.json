@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "start": "deno run cli.ts",
+    "ci": "deno fmt && deno lint && deno check cli.ts && deno test"
+  },
+  "importMap": "./import_map.json"
+}
