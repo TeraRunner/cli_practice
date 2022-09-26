@@ -1,4 +1,4 @@
-import { User } from "./interfaces/user.ts";
+import { DefaultUser } from "./interfaces/user.ts";
 
 import randomUser from "./randomUser.json" assert { type: "json" };
 // Typescript and Deno Basics
@@ -21,21 +21,24 @@ console.log(randomUser);
 //Use map & filter to show specific data
 //Use command line flags to change filters
 function filteringUserData(
-  user: User,
-): string | number | {
-  [key: string]: string | number | { [key: string]: string | number };
-} {
-  function askingData(): string {
+  user: DefaultUser,
+): void {
+  function dataQuery(): string {
     const answer = prompt(
       "Which data do you want to retrieve?",
     );
-    return (typeof answer !== "string") ? askingData() : answer;
+    return (typeof answer !== "string") ? dataQuery() : answer;
   }
-
-  // const filteredUser = user.map((user) => user[askingData()]);
-  const filteredUser = user.map((user) => user[askingData()]);
-  console.log(filteredUser);
-  return typeof (filteredUser);
+  const key = dataQuery();
+  const value = user[key];
+  console.log(value);
 }
+const [firstUser] = randomUser;
 
-filteringUserData(randomUser);
+randomUser && filteringUserData(firstUser);
+
+//option to pick up the properties down, pick 1 or more properties
+
+//ask David he would solve my challenge
+
+//read Typescript handbook
