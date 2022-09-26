@@ -73,16 +73,16 @@ type UserProperties =
   | PicturesUrl;
 
 export interface DefaultUser extends Record<string, UserProperties> {
-  gender: string;
-  name: Name;
-  location: Location;
-  email: string;
-  login: Login;
-  dob: Dob;
-  registered: Registered;
-  phone: string | number;
-  cell: string | number;
-  id: Id;
-  picture: PicturesUrl;
-  nat: string;
+  gender?: string;
+  name?: Name;
+  location?: Location;
+  email?: string;
+  login?: Login;
+  dob?: Dob;
+  registered?: Registered;
+  phone?: string | number;
+  cell?: string | number;
+  id?: Id;
+  picture?: PicturesUrl;
+  nat?: string;
 }
