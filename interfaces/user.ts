@@ -1,61 +1,88 @@
-export type User = Array<DefaultUser>;
-
-export type DefaultUser = {
-  [key: string]: string | number | {
-    [key: string]: string | number | { [key: string]: string | number };
-  };
-  // gender?: string;
-  // name?: {
-  //   title?: string;
-  //   first?: string;
-  //   last?: string;
-  // };
-  // location?: {
-  //   street?: {
-  //     number?: number;
-  //     name?: string;
-  //   };
-  //   city?: string;
-  //   state?: string;
-  //   country?: string;
-  //   postcode?: string | number;
-  //   coordinates?: {
-  //     latitude?: string | number;
-  //     longitude?: string | number;
-  //   };
-  //   timezone?: {
-  //     offset?: string;
-  //     description?: string;
-  //   };
-  // };
-  // email?: string;
-  // login?: {
-  //   uuid?: string;
-  //   username?: string;
-  //   password?: string;
-  //   salt?: string;
-  //   md5?: string;
-  //   sha1?: string;
-  //   sha256?: string;
-  // };
-  // dob?: {
-  //   date?: string;
-  //   age?: number;
-  // };
-  // registered?: {
-  //   date?: string;
-  //   age?: number;
-  // };
-  // phone?: string | number;
-  // cell?: string | number;
-  // id?: {
-  //   name?: string;
-  //   value?: string | number;
-  // };
-  // picture?: {
-  //   large?: string;
-  //   medium?: string;
-  //   thumbnail?: string;
-  // };
-  // nat?: string;
+type Name = {
+  title?: string;
+  first?: string;
+  last?: string;
 };
+
+type Location = {
+  street?: Street;
+  city?: string;
+  state?: string;
+  country?: string;
+  postcode?: string | number;
+  coordinates?: Coordinates;
+  timezone?: Timezone;
+};
+
+type Street = {
+  number?: number;
+  name?: string;
+};
+
+type Coordinates = {
+  latitude?: string | number;
+  longitude?: string | number;
+};
+
+type Timezone = {
+  offset?: string;
+  description?: string;
+};
+
+type Login = {
+  uuid?: string;
+  username?: string;
+  password?: string;
+  salt?: string;
+  md5?: string;
+  sha1?: string;
+  sha256?: string;
+};
+
+type Dob = {
+  date?: string;
+  age?: number;
+};
+
+type Registered = {
+  date?: string;
+  age?: number;
+};
+
+type Id = {
+  name?: string;
+  value?: string | number | null;
+};
+
+interface PicturesUrl {
+  large?: string;
+  medium?: string;
+  thumbnail?: string;
+}
+
+type UserProperties =
+  | string
+  | number
+  | undefined
+  | Name
+  | Location
+  | Login
+  | Dob
+  | Registered
+  | Id
+  | PicturesUrl;
+
+export interface DefaultUser extends Record<string, UserProperties> {
+  gender: string;
+  name: Name;
+  location: Location;
+  email: string;
+  login: Login;
+  dob: Dob;
+  registered: Registered;
+  phone: string | number;
+  cell: string | number;
+  id: Id;
+  picture: PicturesUrl;
+  nat: string;
+}
