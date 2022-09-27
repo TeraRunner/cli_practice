@@ -29,16 +29,25 @@ function filteringUserData(
     );
     return (typeof answer !== "string") ? dataQuery() : answer;
   }
+
   const key = dataQuery();
-  const value = user[key];
-  console.log(value);
+
+  function findByKey(
+    user: DefaultUser,
+    key: string,
+  ): string | void {
+    for (const value in user) {
+      if (value === key) {
+        console.log("line 42 found it ->", value, key, user[key]);
+        return value;
+      } else if (typeof user[value] === "object") {
+        findByKey(user[value] as DefaultUser, key);
+      }
+    }
+  }
+
+  findByKey(user, key);
 }
+
 const [firstUser] = randomUser;
-
 randomUser && filteringUserData(firstUser);
-
-//option to pick up the properties down, pick 1 or more properties
-
-//ask David he would solve my challenge
-
-//read Typescript handbook
