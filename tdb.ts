@@ -1,4 +1,4 @@
-import { DefaultUser } from "./interfaces/user.ts";
+import { DefaultUser, UserProperties } from "./interfaces/user.ts";
 
 import randomUser from "./randomUser.json" assert { type: "json" };
 // Typescript and Deno Basics
@@ -24,28 +24,23 @@ function filteringUserData(
   user: DefaultUser,
 ): void {
   function dataQuery(): string {
-    const answer = prompt(
-      "Which data do you want to retrieve?",
-    );
-    return (typeof answer !== "string") ? dataQuery() : answer;
+    const userPrompt = prompt("Which data do you want to retrieve?");
+    const answer = (typeof userPrompt !== "string") ? dataQuery() : userPrompt;
+    return answer;
   }
-
   const key = dataQuery();
-
   function findByKey(
-    user: DefaultUser,
+    user: DefaultUser | Record<string, UserProperties>,
     key: string,
-  ): string | void {
+  ): void {
     for (const value in user) {
       if (value === key) {
         console.log("line 42 found it ->", value, key, user[key]);
-        return value;
       } else if (typeof user[value] === "object") {
-        findByKey(user[value] as DefaultUser, key);
+        findByKey(user[value] as Record<string, UserProperties>, key);
       }
     }
   }
-
   findByKey(user, key);
 }
 
