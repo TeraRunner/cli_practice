@@ -9,5 +9,5 @@ const rubensFavoriteBandName = "kiss";
 console.log(artistsByBand[rubensFavoriteBandName]);
 const response = await fetch("http://noRealUrl");
 const garysFavoriteBandName = await response.text();
-const garysFavoriteArtist = artistsByBand[garysFavoriteBandName];
-console.log(garysFavoriteArtist);
+const garysFavoriteArtists = artistsByBand[garysFavoriteBandName];
+console.log(garysFavoriteArtists);
